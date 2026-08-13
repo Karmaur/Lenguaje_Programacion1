@@ -8,7 +8,7 @@ public class Cifrado {
     public static void main(String[] args) throws IOException{
     	
       ///COMENTARIO PRUEBA GITHUB
-    	
+    ///COMENTARIO PRUEBA GITHUB2	
     	BufferedReader entrada =
                 new BufferedReader(new InputStreamReader(System.in));
 
