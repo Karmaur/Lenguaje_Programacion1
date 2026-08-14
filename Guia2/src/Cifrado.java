@@ -5,199 +5,172 @@ import java.io.IOException;
 
 public class Cifrado {
 
-    public static void main(String[] args) throws IOException{
-    	
-      ///COMENTARIO PRUEBA GITHUB
-    ///COMENTARIO PRUEBA GITHUB2	
-    	BufferedReader entrada =
-                new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) throws IOException{
 
-        // ================================================
-        // MENSAJE QUE INGRESA EL USUARIO
-        // ================================================
-    	//System.out.print("Ingrese el mensaje: ");
-        String mensaje1 = "Hola Mundo Java"; //entrada.readLine();
-        String mensaje2 = "Anita lava la tina";//entrada.readLine();
-        String mensaje3 = "Wxor Jyxbq"; //entrada.readLine();
-        int desplazamiento = 3;  //Integer.parseInt(entrada.readLine())
-              
+		///COMENTARIO PRUEBA GITHUB
+		///COMENTARIO PRUEBA GITHUB2	
+		BufferedReader entrada =new BufferedReader(new InputStreamReader(System.in));
 
-        // ================================================
-        // ARREGLO DE SIMULACIÓN SOLICITADO
-        // ================================================
-
-        int[] simulacion = {1, 2, 3, 4, 5};
-
-        int posicion = 0;
-
-        int opcion = 0;
+		// ================================================
+		// MENSAJE QUE INGRESA EL USUARIO
+		// ================================================
+		//System.out.print("Ingrese el mensaje: ");
+		String mensaje1 = "Hola Mundo Java"; //entrada.readLine();
+		String mensaje2 = "Anita lava la tina";//entrada.readLine();
+		String mensaje3 = "Wxor Jyxbq"; //entrada.readLine();
+		int desplazamiento = 3;  //Integer.parseInt(entrada.readLine())
 
 
-        // ================================================
-        // MENÚ PRINCIPAL
-        // ================================================
+		// ================================================
+		// ARREGLO DE SIMULACIÓN SOLICITADO
+		// ================================================
 
-        do {
+		int[] opciones = {1, 2, 3, 4, 5};
 
-            System.out.println();
-            System.out.println("==============================================");
-            System.out.println("       SISTEMA DE CIFRADO CÉSAR");
-            System.out.println("==============================================");
-            System.out.println("Mensaje 1: " + mensaje1);
-            System.out.println("Mensaje 2: " + mensaje2);
-            System.out.println("Mensaje 3: " + mensaje3);
-            System.out.println("----------------------------------------------");
-            System.out.println("1. Cifrar un mensaje");
-            System.out.println("2. Descifrar un mensaje");
-            System.out.println("3. Analizar frecuencia de caracteres");
-            System.out.println("4. Verificar si un mensaje es palíndromo");
-            System.out.println("5. Salir");
-            System.out.println("==============================================");
+		int opcion = 0;
 
-            System.out.print("Seleccione una opción: ");
+		// ================================================
+		// MENÚ PRINCIPAL
+		// ================================================
 
-            opcion = Integer.parseInt(entrada.readLine());
+		do {
 
+			System.out.println();
+			System.out.println("==============================================");
+			System.out.println("       SISTEMA DE CIFRADO CÉSAR");
+			System.out.println("==============================================");
+			System.out.println(opciones[0] + ". Cifrar un mensaje");
+			System.out.println(opciones[1] + ". Descifrar un mensaje");
+			System.out.println(opciones[2] + ". Analizar frecuencia de caracteres");
+			System.out.println(opciones[3] + ". Verificar si un mensaje es palindromo");
+			System.out.println(opciones[4] + ". Salir");
+			System.out.println("=============================================="); 
 
-            switch (opcion) {
+			System.out.print("Seleccione una opción: ");
 
-                // ========================================
-                // OPCIÓN 1 - CIFRAR
-                // ========================================
-                case 1:
+			opcion = Integer.parseInt(entrada.readLine());
 
-                    String mensajeCifrado =
-                            CifradoCesar.cifrar(mensaje1, desplazamiento);
+			switch (opcion) {
 
-                    System.out.println();
-                    System.out.println("----- CIFRADO -----");
-                    System.out.println("Mensaje original:  " + mensaje1);
-                    System.out.println("Desplazamiento:    " + desplazamiento);
-                    System.out.println("Mensaje cifrado:   " + mensajeCifrado);
+			// ========================================
+			// OPCIÓN 1 - CIFRAR
+			// ========================================
+			case 1:
 
-                    break;
+				System.out.print("Seleccione opcion 1 para cifrar y opcion 2 para recifrar: ");
+				int seleccion = Integer.parseInt(entrada.readLine());
 
-                // ========================================
-                // OPCIÓN 2 - DESCIFRAR
-                // ========================================
-                case 2:
+				if (seleccion == 1) { 
 
-                    System.out.print(
-                            "Ingrese el mensaje cifrado que desea descifrar: "
-                    );
+					String mensajeCifrado =
+							CifradoCesar.cifrar(mensaje1, desplazamiento);
 
-                    String mensajeCifradoUsuario = mensaje3;
-                            //entrada.readLine();
+					System.out.println();
+					System.out.println("----- CIFRADO -----");
+					System.out.println("Mensaje original:  " + mensaje1);
+					System.out.println("Desplazamiento:    " + desplazamiento);
+					System.out.println("Mensaje cifrado:   " + mensajeCifrado);
 
-                    System.out.print(
-                            "Ingrese el desplazamiento utilizado: "
-                    );
+					break;
+				}				
 
-                    int desplazamientoDescifrar =10;
-                            //Integer.parseInt(entrada.readLine());
+				else {
 
-                    String mensajeDescifrado =
-                            CifradoCesar.descifrar(
-                                    mensajeCifradoUsuario,
-                                    desplazamientoDescifrar
-                            );
+					System.out.println("cuantas veces se recifrara: ");
+					int veces = Integer.parseInt(entrada.readLine());
+					String mensajeRepetirCifrado =
+							CifradoCesar.repetirCifrado(mensaje1, desplazamiento, veces);
 
-                    System.out.println();
-                    System.out.println("----- DESCIFRADO -----");
-                    System.out.println(
-                            "Mensaje cifrado:    "
-                                    + mensajeCifradoUsuario
-                    );
-                    System.out.println(
-                            "Desplazamiento:      "
-                                    + desplazamientoDescifrar
-                    );
-                    System.out.println(
-                            "Mensaje descifrado:  "
-                                    + mensajeDescifrado
-                    );
+					System.out.println();
+					System.out.println("----- CIFRADO -----");
+					System.out.println("Mensaje original:  " + mensaje1);
+					System.out.println("Desplazamiento:    " + desplazamiento);
+					System.out.println("Mensaje Recifrado: " + mensajeRepetirCifrado);
+					System.out.println("Se recifro  :      "+ veces + " veces" );
 
-                    break;
+					break;					
+				}
+				// ========================================
+				// OPCIÓN 2 - DESCIFRAR
+				// ========================================
+			case 2:
 
-                // ========================================
-                // OPCIÓN 3 - FRECUENCIA
-                // ========================================
-                case 3:
+				System.out.println("Ingrese el mensaje cifrado que desea descifrar: ");
 
-                    String frecuencia =
-                            CifradoCesar.analizarFrecuencia(mensaje1);
+				String mensajeCifradoUsuario = mensaje3;
+				//entrada.readLine();
 
-                    System.out.println();
-                    System.out.println("----- FRECUENCIA -----");
-                    System.out.println("Mensaje analizado: " + mensaje1);
-                    System.out.println();
-                    System.out.println(frecuencia);
+				System.out.println("Ingrese el desplazamiento utilizado: ");
 
-                    break;
+				int desplazamientoDescifrar =10;
+				//Integer.parseInt(entrada.readLine());
 
-                // ========================================
-                // OPCIÓN 4 - PALÍNDROMO
-                // ========================================
-                case 4:
+				String mensajeDescifrado =
+						CifradoCesar.descifrar(
+								mensajeCifradoUsuario,
+								desplazamientoDescifrar
+								);
 
-                    String normalizado =
-                            mensaje3.replace(" ", "").toLowerCase();
+				System.out.println();
+				System.out.println("----- DESCIFRADO -----");
+				System.out.println("Mensaje cifrado:    "+ mensajeCifradoUsuario);
+				System.out.println("Desplazamiento:     "+ desplazamientoDescifrar);
+				System.out.println("Mensaje descifrado: " + mensajeDescifrado
+						);
 
-                    boolean resultadoPalindromo =
-                            CifradoCesar.esPalindromo(mensaje3);
+				break;
 
-                    System.out.println();
-                    System.out.println("----- PALÍNDROMO -----");
-                    System.out.println(
-                            "Texto analizado: \""
-                                    + mensaje3
-                                    + "\""
-                    );
+				// ========================================
+				// OPCIÓN 3 - FRECUENCIA
+				// ========================================
+			case 3:
 
-                    System.out.println(
-                            "Texto normalizado: \""
-                                    + normalizado
-                                    + "\""
-                    );
+				String frecuencia =
+				CifradoCesar.analizarFrecuencia(mensaje1);
 
-                    System.out.println(
-                            "¿Es palíndromo? "
-                                    + resultadoPalindromo
-                    );
+				System.out.println();
+				System.out.println("----- FRECUENCIA -----");
+				System.out.println("Mensaje analizado: " + mensaje1);
+				System.out.println();
+				System.out.println(frecuencia);
 
-                    break;
+				break;
 
-                // ========================================
-                // OPCIÓN 5 - SALIR
-                // ========================================
-                case 5:
+				// ========================================
+				// OPCIÓN 4 - PALÍNDROMO
+				// ========================================
+			case 4:
 
-                    System.out.println();
-                    System.out.println("Saliendo del sistema...");
-                    System.out.println("Programa finalizado.");
+				String normalizado =
+				mensaje2.replace(" ", "").toLowerCase();
 
-                    break;
+				boolean resultadoPalindromo = CifradoCesar.esPalindromo(mensaje2);
+				System.out.println();
+				System.out.println("----- PALÍNDROMO -----");
+				System.out.println("Texto analizado: " + mensaje2);
+				System.out.println("Texto normalizado: " + normalizado);
+				System.out.println("¿Es palíndromo? "+ resultadoPalindromo);
+				break;
+				// ========================================
+				// OPCIÓN 5 - SALIR
+				// ========================================
+			case 5:
+				System.out.println();
+				System.out.println("Saliendo del sistema...");
+				System.out.println("Programa finalizado.");		
+				break;
+				// ========================================
+				// OPCIÓN INVÁLIDA
+				// ========================================
+			default:
+				System.out.println();
+				System.out.println("Opción inválida.");
+				break;
+			}
 
-                // ========================================
-                // OPCIÓN INVÁLIDA
-                // ========================================
-                default:
+		}
+		while (opcion != 5); 
 
-                    System.out.println();
-                    System.out.println("Opción inválida.");
-
-                    break;
-            }
-
-            // Avanzamos la posición del arreglo
-            if (posicion < simulacion.length - 1) {
-
-                posicion++;
-            }
-
-        } while (opcion != 5);
-
-
-}
+	}
 
 }      

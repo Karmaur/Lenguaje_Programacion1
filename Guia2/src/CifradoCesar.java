@@ -1,142 +1,163 @@
 public class CifradoCesar {
 
-	
 	// =====================================================
-    // MÉTODO CIFRAR
-    // =====================================================
-	
-    static String cifrar(String mensaje, int desplazamiento) {
+	// MÉTODO CIFRAR
+	// =====================================================
 
-        String resultado = "";
+	static String cifrar(String mensaje, int desplazamiento) {
 
-        for (int i = 0; i < mensaje.length(); i++) {
+		String resultado = "";
 
-            char ch = mensaje.charAt(i);
+		for (int i = 0; i < mensaje.length(); i++) {
 
-            if (ch >= 'A' && ch <= 'Z') {
+			char ch = mensaje.charAt(i);
 
-                ch = (char) (((ch - 'A' + desplazamiento) % 26) + 'A');
+			if (ch >= 'A' && ch <= 'Z') {
 
-            } else if (ch >= 'a' && ch <= 'z') {
+				ch = (char) (((ch - 'A' + desplazamiento) % 26) + 'A');
 
-                ch = (char) (((ch - 'a' + desplazamiento) % 26) + 'a');
-            }
+			} else if (ch >= 'a' && ch <= 'z') {
 
-            resultado += ch;
-        }
+				ch = (char) (((ch - 'a' + desplazamiento) % 26) + 'a');
+			}
 
-        return resultado;
-    }
+			resultado += ch;
+		}
 
-
-// =====================================================
-// MÉTODO DESCIFRAR
-// =====================================================
-
-static String descifrar(String mensajeCifrado, int desplazamiento) {
-
-    String resultado = "";
-
-    for (int i = 0; i < mensajeCifrado.length(); i++) {
-
-        char ch = mensajeCifrado.charAt(i);
-
-        // Si es mayúscula
-        if (ch >= 'A' && ch <= 'Z') {
-
-            ch = (char) (((ch - 'A' - desplazamiento + 26) % 26) + 'A');
-
-        // Si es minúscula
-        } else if (ch >= 'a' && ch <= 'z') {
-
-            ch = (char) (((ch - 'a' - desplazamiento + 26) % 26) + 'a');
-        }
-
-        resultado += ch;
-    }
-
-    return resultado;
-}
+		return resultado;
+	}
 
 
-// =====================================================
-// MÉTODO FRECUENCIA
-// =====================================================
-static String analizarFrecuencia(String mensaje) {
+	// =====================================================
+	// MÉTODO DESCIFRAR
+	// =====================================================
 
-    int contadorA = 0;
-    int contadorE = 0;
-    int contadorI = 0;
-    int contadorO = 0;
-    int contadorU = 0;
+	static String descifrar(String mensajeCifrado, int desplazamiento) {
 
-    int consonantes = 0;
+		String resultado = "";
 
-    for (int i = 0; i < mensaje.length(); i++) {
+		for (int i = 0; i < mensajeCifrado.length(); i++) {
 
-        char ch = Character.toLowerCase(mensaje.charAt(i));
+			char ch = mensajeCifrado.charAt(i);
 
-        if (ch == 'a') {
+			// Si es mayúscula
+			if (ch >= 'A' && ch <= 'Z') {
 
-            contadorA++;
+				ch = (char) (((ch - 'A' - desplazamiento + 26) % 26) + 'A');
 
-        } else if (ch == 'e') {
+				// Si es minúscula
+			} else if (ch >= 'a' && ch <= 'z') {
 
-            contadorE++;
+				ch = (char) (((ch - 'a' - desplazamiento + 26) % 26) + 'a');
+			}
 
-        } else if (ch == 'i') {
+			resultado += ch;
+		}
 
-            contadorI++;
-
-        } else if (ch == 'o') {
-
-            contadorO++;
-
-        } else if (ch == 'u') {
-
-            contadorU++;
-
-        } else if (ch >= 'a' && ch <= 'z') {
-
-            consonantes++;
-        }
-    }
-
-    String reporte =
-            "Vocal 'a': " + contadorA + "\n" +
-            "Vocal 'e': " + contadorE + "\n" +
-            "Vocal 'i': " + contadorI + "\n" +
-            "Vocal 'o': " + contadorO + "\n" +
-            "Vocal 'u': " + contadorU + "\n" +
-            "Total consonantes: " + consonantes;
-
-    return reporte;
-}
+		return resultado;
+	}
 
 
-//=====================================================
-//MÉTODO PANLINDROMO
-//=====================================================
+	// =====================================================
+	// MÉTODO FRECUENCIA
+	// =====================================================
+	static String analizarFrecuencia(String mensaje) {
 
-static boolean esPalindromo(String texto) {
+		int contadorA = 0;
+		int contadorE = 0;
+		int contadorI = 0;
+		int contadorO = 0;
+		int contadorU = 0;
 
-    // Eliminar espacios y convertir a minúsculas
-    String normalizado = texto.replace(" ", "").toLowerCase();
+		int consonantes = 0;
 
-    // Comparar desde ambos extremos
-    for (int i = 0; i < normalizado.length() / 2; i++) {
+		for (int i = 0; i < mensaje.length(); i++) {
 
-        char izquierda = normalizado.charAt(i);
+			char ch = Character.toLowerCase(mensaje.charAt(i));
 
-        char derecha =
-                normalizado.charAt(normalizado.length() - 1 - i);
+			if (ch == 'a') {
 
-        if (izquierda != derecha) {
+				contadorA++;
 
-            return false;
-        }
-    }
+			} else if (ch == 'e') {
 
-    return true;
-}
+				contadorE++;
+
+			} else if (ch == 'i') {
+
+				contadorI++;
+
+			} else if (ch == 'o') {
+
+				contadorO++;
+
+			} else if (ch == 'u') {
+
+				contadorU++;
+
+			} else if (ch >= 'a' && ch <= 'z') {
+
+				consonantes++;
+			}
+		}
+
+		String reporte =
+				"Vocal 'a': " + contadorA + "\n" +
+				"Vocal 'e': " + contadorE + "\n" +
+				"Vocal 'i': " + contadorI + "\n" +
+				"Vocal 'o': " + contadorO + "\n" +
+				"Vocal 'u': " + contadorU + "\n" +
+				"Total consonantes: " + consonantes;
+
+		return reporte;
+	}
+
+
+	//=====================================================
+	//MÉTODO PANLINDROMO
+	//=====================================================
+
+	static boolean esPalindromo(String texto) {
+
+		// Eliminar espacios y convertir a minúsculas
+		String normalizado = texto.replace(" ", "").toLowerCase();
+
+		// Comparar desde ambos extremos
+		for (int i = 0; i < normalizado.length() / 2; i++) {
+
+			char izquierda = normalizado.charAt(i);
+
+			char derecha =
+					normalizado.charAt(normalizado.length() - 1 - i);
+
+			if (izquierda != derecha) {
+
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	//=====================================================
+	// MÉTODO REPETIR CIFRADO
+	// =====================================================
+
+	static String repetirCifrado(String mensaje, int desplazamiento, int veces) {
+
+		String resultado = mensaje;
+
+		for (int i = 0; i < veces; i++) {
+
+
+			resultado = cifrar(resultado,desplazamiento);
+			System.out.println (resultado);
+
+
+
+		}
+
+		return resultado;
+	}
 }
