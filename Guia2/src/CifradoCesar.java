@@ -1,163 +1,181 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+
 public class CifradoCesar {
 
-	// =====================================================
-	// MÉTODO CIFRAR
-	// =====================================================
+	public static void main(String[] args) throws IOException{
 
-	static String cifrar(String mensaje, int desplazamiento) {
+		BufferedReader entrada =new BufferedReader(new InputStreamReader(System.in));
 
-		String resultado = "";
+		// ================================================
+		// ARREGLO DE SIMULACIÓN SOLICITADO
+		// ================================================
 
-		for (int i = 0; i < mensaje.length(); i++) {
+		int[] opciones = {1, 2, 3, 4, 5};
 
-			char ch = mensaje.charAt(i);
+		int opcion = 0;
 
-			if (ch >= 'A' && ch <= 'Z') {
+		// ================================================
+		// MENÚ PRINCIPAL
+		// ================================================
 
-				ch = (char) (((ch - 'A' + desplazamiento) % 26) + 'A');
+		do {
 
-			} else if (ch >= 'a' && ch <= 'z') {
+			System.out.println();
+			System.out.println("==============================================");
+			System.out.println("       SISTEMA DE CIFRADO CÉSAR");
+			System.out.println("==============================================");
+			System.out.println(opciones[0] + ". Cifrar un mensaje");
+			System.out.println(opciones[1] + ". Descifrar un mensaje");
+			System.out.println(opciones[2] + ". Analizar frecuencia de caracteres");
+			System.out.println(opciones[3] + ". Verificar si un mensaje es palindromo");
+			System.out.println(opciones[4] + ". Salir");
+			System.out.println("=============================================="); 
 
-				ch = (char) (((ch - 'a' + desplazamiento) % 26) + 'a');
+
+
+			// ================================================
+			// MENSAJE QUE INGRESA EL USUARIO
+			// ================================================
+
+			System.out.print("Seleccione una opción: ");
+			opcion = Integer.parseInt(entrada.readLine());
+
+			// ================================================
+			// VARIABLES CICLO DO-WHILE
+			// ================================================
+
+			int desplazamiento;
+			String mensaje;     
+
+			switch (opcion) {
+
+			// ========================================
+			// OPCIÓN 1 - CIFRAR
+			// ========================================
+			case 1:
+
+				System.out.print("Ingrese el Mensaje: ");
+				mensaje = entrada.readLine();
+				System.out.print("Ingrese el desplazamiento: ");
+				desplazamiento = Integer.parseInt(entrada.readLine());
+
+				System.out.print("Seleccione opcion 1 para cifrar\nSeleccione opcion 2 para recifrar\n");
+				int seleccion = Integer.parseInt(entrada.readLine());
+
+				if (seleccion == 1) { 
+
+					String mensajeCifrado =Cifrado.cifrar(mensaje, desplazamiento);
+
+					System.out.println();
+					System.out.println("----- CIFRADO -----");
+					System.out.println("Mensaje original:  " + mensaje);
+					System.out.println("Desplazamiento:    " + desplazamiento);
+					System.out.println("Mensaje cifrado:   " + mensajeCifrado);
+
+					break;
+				}				
+
+				else {
+
+					System.out.println("cuantas veces se recifrara: ");
+					int veces = Integer.parseInt(entrada.readLine());
+					String mensajeRepetirCifrado =Cifrado.repetirCifrado(mensaje, desplazamiento, veces);
+
+					System.out.println();
+					System.out.println("----- CIFRADO -----");
+					System.out.println("Mensaje original:  " + mensaje);
+					System.out.println("Desplazamiento:    " + desplazamiento);
+					System.out.println("Mensaje Recifrado: " + mensajeRepetirCifrado);
+					System.out.println("Se recifro  :      "+ veces + " veces" );
+
+					break;					
+				}
+				// ========================================
+				// OPCIÓN 2 - DESCIFRAR
+				// ========================================
+			case 2:
+				System.out.print("Ingrese el Mensaje: ");
+				mensaje = entrada.readLine();
+
+				System.out.print("Ingrese el desplazamiento: ");
+				desplazamiento = Integer.parseInt(entrada.readLine());
+
+				System.out.println("Ingrese el mensaje cifrado que desea descifrar: ");
+
+				String mensajeCifradoUsuario = mensaje;
+				//entrada.readLine();
+
+				System.out.println("Ingrese el desplazamiento utilizado: ");
+
+
+				String mensajeDescifrado =Cifrado.descifrar(mensajeCifradoUsuario,desplazamiento);
+
+				System.out.println();
+				System.out.println("----- DESCIFRADO -----");
+				System.out.println("Mensaje cifrado:    "+ mensajeCifradoUsuario);
+				System.out.println("Desplazamiento:     "+ desplazamiento);
+				System.out.println("Mensaje descifrado: " + mensajeDescifrado
+						);
+
+				break;
+
+				// ========================================
+				// OPCIÓN 3 - FRECUENCIA
+				// ========================================
+			case 3:
+
+				System.out.print("Ingrese el Mensaje: ");
+				mensaje = entrada.readLine();
+
+				String frecuencia =Cifrado.analizarFrecuencia(mensaje);
+
+				System.out.println();
+				System.out.println("----- FRECUENCIA -----");
+				System.out.println("Mensaje analizado: " + mensaje);
+				System.out.println();
+				System.out.println(frecuencia);
+
+				break;
+
+				// ========================================
+				// OPCIÓN 4 - PALÍNDROMO
+				// ========================================
+			case 4:
+				System.out.print("Ingrese el Mensaje: ");
+				mensaje = entrada.readLine();
+				String normalizado =
+						mensaje.replace(" ", "").toLowerCase();
+
+				boolean resultadoPalindromo = Cifrado.esPalindromo(mensaje);
+				System.out.println();
+				System.out.println("----- PALÍNDROMO -----");
+				System.out.println("Texto analizado: " + mensaje);
+				System.out.println("Texto normalizado: " + normalizado);
+				System.out.println("¿Es palíndromo? "+ resultadoPalindromo);
+				break;
+				// ========================================
+				// OPCIÓN 5 - SALIR
+				// ========================================
+			case 5:
+				System.out.println();
+				System.out.println("Saliendo del sistema...");
+				System.out.println("Programa finalizado.");		
+				break;
+				// ========================================
+				// OPCIÓN INVÁLIDA
+				// ========================================
+			default:
+				System.out.println();
+				System.out.println("Opción inválida.");
+				break;
 			}
 
-			resultado += ch;
 		}
+		while (opcion != 5); 
 
-		return resultado;
 	}
 
-
-	// =====================================================
-	// MÉTODO DESCIFRAR
-	// =====================================================
-
-	static String descifrar(String mensajeCifrado, int desplazamiento) {
-
-		String resultado = "";
-
-		for (int i = 0; i < mensajeCifrado.length(); i++) {
-
-			char ch = mensajeCifrado.charAt(i);
-
-			// Si es mayúscula
-			if (ch >= 'A' && ch <= 'Z') {
-
-				ch = (char) (((ch - 'A' - desplazamiento + 26) % 26) + 'A');
-
-				// Si es minúscula
-			} else if (ch >= 'a' && ch <= 'z') {
-
-				ch = (char) (((ch - 'a' - desplazamiento + 26) % 26) + 'a');
-			}
-
-			resultado += ch;
-		}
-
-		return resultado;
-	}
-
-
-	// =====================================================
-	// MÉTODO FRECUENCIA
-	// =====================================================
-	static String analizarFrecuencia(String mensaje) {
-
-		int contadorA = 0;
-		int contadorE = 0;
-		int contadorI = 0;
-		int contadorO = 0;
-		int contadorU = 0;
-
-		int consonantes = 0;
-
-		for (int i = 0; i < mensaje.length(); i++) {
-
-			char ch = Character.toLowerCase(mensaje.charAt(i));
-
-			if (ch == 'a') {
-
-				contadorA++;
-
-			} else if (ch == 'e') {
-
-				contadorE++;
-
-			} else if (ch == 'i') {
-
-				contadorI++;
-
-			} else if (ch == 'o') {
-
-				contadorO++;
-
-			} else if (ch == 'u') {
-
-				contadorU++;
-
-			} else if (ch >= 'a' && ch <= 'z') {
-
-				consonantes++;
-			}
-		}
-
-		String reporte =
-				"Vocal 'a': " + contadorA + "\n" +
-				"Vocal 'e': " + contadorE + "\n" +
-				"Vocal 'i': " + contadorI + "\n" +
-				"Vocal 'o': " + contadorO + "\n" +
-				"Vocal 'u': " + contadorU + "\n" +
-				"Total consonantes: " + consonantes;
-
-		return reporte;
-	}
-
-
-	//=====================================================
-	//MÉTODO PANLINDROMO
-	//=====================================================
-
-	static boolean esPalindromo(String texto) {
-
-		// Eliminar espacios y convertir a minúsculas
-		String normalizado = texto.replace(" ", "").toLowerCase();
-
-		// Comparar desde ambos extremos
-		for (int i = 0; i < normalizado.length() / 2; i++) {
-
-			char izquierda = normalizado.charAt(i);
-
-			char derecha =
-					normalizado.charAt(normalizado.length() - 1 - i);
-
-			if (izquierda != derecha) {
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-
-	//=====================================================
-	// MÉTODO REPETIR CIFRADO
-	// =====================================================
-
-	static String repetirCifrado(String mensaje, int desplazamiento, int veces) {
-
-		String resultado = mensaje;
-
-		for (int i = 0; i < veces; i++) {
-
-
-			resultado = cifrar(resultado,desplazamiento);
-			System.out.println (resultado);
-
-
-
-		}
-
-		return resultado;
-	}
-}
+}      
