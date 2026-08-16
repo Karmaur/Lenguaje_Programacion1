@@ -9,17 +9,13 @@ public class CifradoCesar {
 
 		BufferedReader entrada =new BufferedReader(new InputStreamReader(System.in));
 
-		// ================================================
 		// ARREGLO DE SIMULACIÓN SOLICITADO
-		// ================================================
 
 		int[] opciones = {1, 2, 3, 4, 5};
 
 		int opcion = 0;
 
-		// ================================================
 		// MENÚ PRINCIPAL
-		// ================================================
 
 		do {
 
@@ -35,35 +31,29 @@ public class CifradoCesar {
 			System.out.println("=============================================="); 
 
 
-
-			// ================================================
 			// MENSAJE QUE INGRESA EL USUARIO
-			// ================================================
 
 			System.out.print("Seleccione una opción: ");
-			opcion = Integer.parseInt(entrada.readLine());
+			opcion = Cifrado.leerEntero(entrada);
 
-			// ================================================
 			// VARIABLES CICLO DO-WHILE
-			// ================================================
 
 			int desplazamiento;
 			String mensaje;     
 
 			switch (opcion) {
 
-			// ========================================
 			// OPCIÓN 1 - CIFRAR
-			// ========================================
 			case 1:
 
 				System.out.print("Ingrese el Mensaje: ");
-				mensaje = entrada.readLine();
+				mensaje = Cifrado.leerSoloLetras(entrada);//entrada.readLine();
 				System.out.print("Ingrese el desplazamiento: ");
-				desplazamiento = Integer.parseInt(entrada.readLine());
+				desplazamiento = Cifrado.leerEntero(entrada);   //Integer.parseInt(entrada.readLine());
 
-				System.out.print("Seleccione opcion 1 para cifrar\nSeleccione opcion 2 para recifrar\n");
-				int seleccion = Integer.parseInt(entrada.readLine());
+				System.out.println("Seleccione opcion 1 para cifrar\nSeleccione opcion 2 para recifrar");
+				System.out.print("Seleccione una opción: ");
+				int seleccion = Cifrado.leerEntero(entrada);
 
 				if (seleccion == 1) { 
 
@@ -80,8 +70,8 @@ public class CifradoCesar {
 
 				else {
 
-					System.out.println("cuantas veces se recifrara: ");
-					int veces = Integer.parseInt(entrada.readLine());
+					System.out.print("cuantas veces se recifrara: ");
+					int veces = Cifrado.leerEntero(entrada);
 					String mensajeRepetirCifrado =Cifrado.repetirCifrado(mensaje, desplazamiento, veces);
 
 					System.out.println();
@@ -93,15 +83,15 @@ public class CifradoCesar {
 
 					break;					
 				}
-				// ========================================
+				
 				// OPCIÓN 2 - DESCIFRAR
-				// ========================================
+
 			case 2:
 				System.out.print("Ingrese el Mensaje: ");
-				mensaje = entrada.readLine();
+				mensaje = Cifrado.leerSoloLetras(entrada);
 
 				System.out.print("Ingrese el desplazamiento: ");
-				desplazamiento = Integer.parseInt(entrada.readLine());
+				desplazamiento = Cifrado.leerEntero(entrada);
 
 				System.out.println("Ingrese el mensaje cifrado que desea descifrar: ");
 
@@ -122,13 +112,12 @@ public class CifradoCesar {
 
 				break;
 
-				// ========================================
 				// OPCIÓN 3 - FRECUENCIA
-				// ========================================
+
 			case 3:
 
 				System.out.print("Ingrese el Mensaje: ");
-				mensaje = entrada.readLine();
+				mensaje = Cifrado.leerSoloLetras(entrada);
 
 				String frecuencia =Cifrado.analizarFrecuencia(mensaje);
 
@@ -140,12 +129,11 @@ public class CifradoCesar {
 
 				break;
 
-				// ========================================
 				// OPCIÓN 4 - PALÍNDROMO
-				// ========================================
+
 			case 4:
 				System.out.print("Ingrese el Mensaje: ");
-				mensaje = entrada.readLine();
+				mensaje =Cifrado.leerSoloLetras(entrada);
 				String normalizado =
 						mensaje.replace(" ", "").toLowerCase();
 
@@ -156,17 +144,17 @@ public class CifradoCesar {
 				System.out.println("Texto normalizado: " + normalizado);
 				System.out.println("¿Es palíndromo? "+ resultadoPalindromo);
 				break;
-				// ========================================
+
 				// OPCIÓN 5 - SALIR
-				// ========================================
+
 			case 5:
 				System.out.println();
 				System.out.println("Saliendo del sistema...");
 				System.out.println("Programa finalizado.");		
 				break;
-				// ========================================
+
 				// OPCIÓN INVÁLIDA
-				// ========================================
+
 			default:
 				System.out.println();
 				System.out.println("Opción inválida.");
